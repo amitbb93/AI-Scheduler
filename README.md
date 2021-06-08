@@ -4,6 +4,7 @@
 
 ![alt text](https://github.com/amitbb93/AI-Scheduler/blob/main/Images/AI-Scheduler.jpg)
 
+
 ## Contribution/project goal
 
 Our AI Scheduler will provide an easy way to create a shifts board for the managers and the workers. 
