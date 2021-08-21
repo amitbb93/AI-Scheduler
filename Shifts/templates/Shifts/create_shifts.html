@@ -1,0 +1,8 @@
+{% extends "Shifts/base.html" %}
+{% block content %}
+    <h1>Create shifts</h1>
+<form id="create" name="create" method="post">
+	{% csrf_token %}
+    <button class="btn action-btn" type="submit" id="run" name="run" align="middle">Create shifts :)</button>
+</form>
+{% endblock content %} 

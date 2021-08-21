@@ -1,0 +1,49 @@
+{% extends "Shifts/base.html" %}
+{% block content %}
+    <h1>Offer\Swap</h1>
+<div class="container">
+</div>
+<form action="."  method='post'>
+    {% csrf_token %}
+	<div class="offerSwap-header" align="left">
+        <h1> <small class="Choose your preference" align = 'center'>Choose your preference</small></h1>
+    </div>
+
+
+  <select onchange="myFunction()" id="OfferOrSwap" name="choise">
+    <option>Choose your preference</option>
+	<option value="Offer">Offer</option>
+	<option value="Swap">Swap</option>
+  </select>
+
+
+  <div class="Worker-header" align="left" >
+        <h1> <small class="Choose your preference"> Choose the worker you want to swap\offer the shift with</small></h1>
+    </div>
+
+
+  <select onchange="myFunction()" id="selectWorker" name="target">
+    <option>Choose a worker</option>
+	 {% for worker in workers %}
+	<option value="{{ worker }}">{{ worker }}</option>
+	{% endfor %}
+  </select>
+
+   <select id="selectYourShift">
+    <option>Choose a shift</option>
+	 {% for worker in workers %}
+	<option value="{{ worker }}">{{ worker }}</option>
+	{% endfor %}
+  </select>
+
+
+   <select id="selectOtherShift">
+    <option>Choose a shift to swap</option>
+	 {% for worker in workers %}
+	<option value="{{ worker }}">{{ worker }}</option>
+	{% endfor %}
+  </select>
+
+    <input type="submit">
+</form>
+{% endblock content %}

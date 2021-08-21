@@ -1,0 +1,45 @@
+{% extends "Shifts/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1> Pick Your Shifts <small class="instructions">press on the right squares</small></h1>
+    </div>
+</div>
+
+
+<form id="shifts_to_send" name="shifts_to_send" method="post">
+    {% csrf_token %}
+<div class="container" align = 'center'>
+
+    <table class="table-responsive-down">
+	<th>
+        {% for date in dates %}
+            <th>{{ date }}</th>
+        {% endfor %}
+	</th>
+        {% for shift in shift_options_list %}
+        <tr>
+            {% for date in dates %}
+            <input type="checkbox" id="{{date}}{{shift}}" name="{{date}}{{shift}}" value="True" style="display:none">
+            <td><button class="btn" onclick="addItem(this); document.getElementById('{{date}}{{shift}}').checked=!document.getElementById('{{date}}{{shift}}').checked;" name="option" type="button" value="'{{date}}{{shift}}'" >{{ shift }}</button></td>
+            {% endfor %}
+            <input type="hidden" name="result" id="result" />
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <div>
+        <p class="instructions">Selected squares are turn <span class="markedGeen">GREEN</span></p>
+    </div>
+    <div>
+    <h3> {{ favorite_shifts }} </h3>
+    </div>
+
+</div>
+
+<div class="container-submit" align="right">
+    <button class="btn action-btn" type="button" id="submit_button" >Submit</button>
+</div>
+</form>
+{% endblock content %}

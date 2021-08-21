@@ -1,0 +1,60 @@
+{% extends "Shifts/base.html" %}
+{% block content %}
+<form id="edit" name="edit" method="post">
+	{% csrf_token %}
+    <h1>Edit Shift</h1>
+	<table id="shifts">
+	  <tr>
+		<th>Shift</th>
+		{% for date in dates %}
+            <th>{{ date }}</th>
+        {% endfor %}
+	  </tr>
+	  <tr>
+		<td>Morning Shift</td>
+		{% for morning in Morning %}
+            <td><select id={{morning.1}} name="{{morning.1}}">
+				{% for worker in workers %}
+					{% if morning.0 == worker %}
+						<option value={{ worker }} selected>{{ worker }}</option>
+					{% else %}
+						<option value={{ worker }}>{{ worker }}</option>
+					{% endif %}
+				{% endfor %}
+			</select></td>
+        {% endfor %}
+	  </tr>
+	  <tr>
+		<td>Evening Shift</td>
+		{% for evening in Evening %}
+		    <td><select id={{evening.1}} name="{{evening.1}}">
+				{% for worker in workers %}
+					{% if evening.0 == worker %}
+						<option value={{ worker }} selected>{{ worker }}</option>
+					{% else %}
+						<option value={{ worker }}>{{ worker }}</option>
+					{% endif %}
+				{% endfor %}
+			</select></td>
+        {% endfor %}
+	  </tr>
+	  <tr>
+		<td>Night Shift</td>
+		{% for night in Night %}
+		    <td><select id={{night.1}} name="{{night.1}}">
+				{% for worker in workers %}
+					{% if night.0 == worker %}
+						<option value={{ worker }} selected>{{ worker }}</option>
+					{% else %}
+						<option value={{ worker }}>{{ worker }}</option>
+					{% endif %}
+				{% endfor %}
+			</select></td>
+        {% endfor %}
+	  </tr>
+	</table>
+	<br>
+	<br>
+  <button class="btn action-btn" type="submit" id="Save" name="Save" align="middle">Save</button>
+</form>
+{% endblock content %}
