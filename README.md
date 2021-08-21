@@ -2,7 +2,7 @@
 <h2>Final Project Computer Science - Ariel University</h2><br>
 <h3>Team members: Amit Bibi 203262647, Moran Oshia 313292633, Alex Chagan 206262123</h3><br>
 
-![alt text](https://github.com/amitbb93/AI-Scheduler/blob/main/Images/AI-Scheduler.jpg)
+![alt text](https://github.com/amitbb93/AI-Scheduler/blob/main/Documents/AI-Scheduler.jpg)
 
 
 ## Contribution/project goal
