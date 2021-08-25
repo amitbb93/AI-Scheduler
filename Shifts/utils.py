@@ -128,7 +128,6 @@ def get_requests(request,admin_flag):
                             'status').get().val())
     if admin_flag:
         if not users_arr:
-
             return users_arr, from_date_arr, to_date_arr, status_arr, False
     return users_arr, from_date_arr, to_date_arr, status_arr, True
 
@@ -164,7 +163,9 @@ def swap_shifts(from_user,to_user,from_date,to_date,to_date_db):
         ids = list(ids)
         for j in range(len(ids)):
             if database.database.child('offer_swap').child(users[i]).child(ids[j]).child(
-                    'to_shift').get().val() == to_date_db:
+                    'to_shift').get().val() == to_date_db and \
+                    database.database.child('offer_swap').child(users[i]).child(ids[j]).child(
+                        'my_shift').get().val() != from_date:
                 database.database.child('offer_swap').child(users[i]).child(ids[j]).update({'status': 'Rejected'})
 
 def remove_request(from_user,from_date,to_date_db):

@@ -55,7 +55,6 @@ def schedule(request):
 @login_required
 def submitting(request):
     suggests, favorite_shifts = sug.checkIfReadyForML(request)
-
     if request.method == "POST":
         algorithm.insert_worker_shifts(request)
         redirect_url = '/'
@@ -160,6 +159,8 @@ def edit(request):
         return HttpResponseRedirect(redirect_url)
     final_shifts = algorithm.get_shifts_schedule(0)
     workers = utils.WORKER_LIST
-    workers.insert(0,"Empty")
+    if not workers[0] == "Empty":
+        workers.insert(0,"Empty")
+
     final_shifts_ids = edit_shifts_algo.adding_ids_to_array(final_shifts)
     return render(request, 'Shifts/edit_shifts.html', {'dates':utils.get_week_dates1(0), 'Morning':final_shifts_ids[:7], 'Evening':final_shifts_ids[7:14], 'Night':final_shifts_ids[14:], 'flag_prev':flag_prev, 'flag_next':flag_next, 'workers':workers})
