@@ -1,0 +1,37 @@
+{% extends "Shifts/base.html" %}
+{% block content %}
+    <h1>Requests</h1>
+<div class="container">
+</div>
+<h3 name="req">{{req}}</h3>
+
+{% for i,j,k,m,n,b in mylist %}
+    <form action="."  method='post'>
+        {% csrf_token %}
+
+
+
+        <br> <b> Request from: </b> {{i}} &nbsp <b> From shift: </b> {{m}} &nbsp <b> To shift: </b> {{n}} &nbsp <b> Request for: </b> {{b}} &nbsp
+        <input id="data" name="data" value="{{i}}#{{j}}#{{k}}" hidden=True>
+        <input style="  width: 100px;
+    height: 35px;
+    border-radius: 70px;
+    font-size: 16px;
+    background-color: #479bff;
+    color: #001f45;
+    min-width: 135px;
+    align-items: center;" type="submit" name="submit_accept" value="Accept">
+        <input style="  width: 100px;
+    height: 35px;
+    border-radius: 70px;
+    font-size: 16px;
+    background-color: #479bff;
+    color: #001f45;
+    min-width: 135px;
+    align-items: center;" type="submit" name="submit_reject" value="Reject">
+        <br>
+    </form>
+    {% endfor %}
+
+
+{% endblock content %}

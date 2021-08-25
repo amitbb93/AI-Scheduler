@@ -4,10 +4,17 @@
 	{% csrf_token %}
     <h1>Edit Shift</h1>
 	<table id="shifts">
-	  <tr>
-		<th>Shift</th>
+	   <tr>
+		<th></th>
 		{% for date in dates %}
-            <th>{{ date }}</th>
+            <th>{{date.0}}</th>
+        {% endfor %}
+	  </tr>
+	  <tr>
+		<th></th>
+		{% for date in dates %}
+
+		   <th>{{date.1}}</th>
         {% endfor %}
 	  </tr>
 	  <tr>

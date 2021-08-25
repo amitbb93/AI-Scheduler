@@ -1,0 +1,23 @@
+shift Type,present of take shift 4 weeks befor,taken last week,present of take all weeks befor,taken
+sunday_morning,0.75,0.7,1,0
+sunday_evening,0.0,0.2,0,0
+sunday_night,0.0,0.1,0,0
+monday_morning,1.0,1.0,1,1
+monday_evening,0.0,0.4,0,0
+monday_night,0.0,0.2,0,0
+tuesday_morning,1.0,0.5,1,1
+tuesday_evening,0.0,0.5,0,0
+tuesday_night,0.0,0.3,0,0
+wednesday_morning,0.0,0.0,0,0
+wednesday_evening,1.0,1.0,1,1
+wednesday_night,0.0,0.3,0,0
+thursday_morning,0.0,0.0,0,0
+thursday_evening,0.0,0.4,0,0
+thursday_night,1.0,0.7,1,1
+friday_morning,0.0,0.4,0,0
+friday_evening,0.0,0.0,0,0
+friday_night,0.0,0.3,0,0
+saturday_morning,0.0,0.1,0,0
+saturday_evening,0.0,0.2,0,0
+saturday_night,0.0,0.1,0,0
+

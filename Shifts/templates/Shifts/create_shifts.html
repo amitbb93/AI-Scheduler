@@ -1,8 +1,50 @@
 {% extends "Shifts/base.html" %}
 {% block content %}
     <h1>Create shifts</h1>
+<br></br>
 <form id="create" name="create" method="post">
 	{% csrf_token %}
-    <button class="btn action-btn" type="submit" id="run" name="run" align="middle">Create shifts :)</button>
+    <h7>Click here to create borad (You can edit the shifts in Edit Shifts) :</h7><br></br>
+    <button class="btn action-btn" type="submit" id="run" name="run" align="center">Create shifts</button>
+<br></br>
+	<h7>{{error}}</h7>
+<br></br>
+
+	{% if flag == True %}
+
+    <table id="shifts" class="shifts">
+		 <tr>
+		<th></th>
+		{% for date in dates %}
+            <th>{{date.0}}</th>
+        {% endfor %}
+	  </tr>
+	  <tr>
+		<th></th>
+		{% for date in dates %}
+
+		   <th>{{date.1}}</th>
+        {% endfor %}
+	  </tr>
+	  <tr>
+		<td>Morning Shift</td>
+		{% for morning in Morning %}
+            <td>{{ morning }}</td>
+        {% endfor %}
+	  </tr>
+	  <tr>
+		<td>Evening Shift</td>
+		{% for evening in Evening %}
+		    <td>{{ evening }}</td>
+        {% endfor %}
+	  </tr>
+	  <tr>
+		<td>Night Shift</td>
+		{% for night in Night %}
+            <td>{{ night }}</td>
+        {% endfor %}
+	  </tr>
+	</table>
+	{% endif %}
 </form>
 {% endblock content %} 

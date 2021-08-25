@@ -1,18 +1,23 @@
 
 .table-responsive-down {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .page-header {
     text-align: center;
 }
 
+.th {
 
+  text-align: center;
+}
 .container-submit {
-    margin-right: 35%;
+    margin-right: 0%;
 }
 
-
+.select-shift{
+    margin-left: 25%;
+}
 .form-control {
     background-color: lightyellow ;
     font-family: "Open Sans", sans-serif;

@@ -1,38 +1,71 @@
 {% extends "Shifts/base.html" %}
 {% block content %}
 
-    <h1>AI-Scheduler</h1>
+<body style="background-image: url(../static/Shifts/css/back.jpg);background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+        <section class="first-section">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-content">
+                  <h2 style="text-align: left;"><strong>                 </strong></h2>
+                  <div></div>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-<section id="introblocks">
-      <div class="sectiontitle">
-        <h6 class="heading">About Us</h6>
-        <p>AI Scheduler will provide an easy way to create a shifts board for the managers and the workers.</p>
-      </div>
-      <ul class="nospace group">
-        <li class="one_third first">
-          <article><a href="#"><i class="fas fa-allergies"></i></a>
-            <h6 class="heading">Create Weekly Shift Schedules </h6>
-            <p>Nowadays, most of the process of creating shifts schedules is a tedious process for employers and employees.
-                AI-Scheduler will compute a work schedule for workers based on their roles, preferences, restrictions, etc.[&hellip;]</p>
-
-          </article>
-        </li>
-        <li class="one_third">
-          <article><a href="#"><i class="fas fa-cube"></i></a>
-            <h6 class="heading">Shift Schedule Suggestion</h6>
-            <p>The AI-Schedule will use a ML algorithm that will learn the cyclical's shift the employee chose when worker will fill up his\er shift board, and the
+        <section class="second-section">
+          <div class="container">
+            <div style="padding-bottom: 120px" class="row">
+              <div class="col-md-3 col-sm-6">
+                <div class="service-item">
+                  <div class="icon">
+                    <img src="sched.png" alt="">
+                  </div>
+                  <h4>Create Weekly Shift Schedules </h4>
+                  <p>Nowadays, most of the process of creating shifts schedules is a tedious process for employers and employees.
+                AI-Scheduler will compute a work schedule for workers based on their roles, preferences, restrictions, etc.</p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="service-item">
+                  <div class="icon">
+                    <img src="img/second-icon.png" alt="">
+                  </div>
+                  <h4>Shift Schedule Suggestion</h4>
+                  <p>The AI-Schedule will use a ML algorithm that will learn the cyclical's shift the employee chose when worker will fill up his\er shift board, and the
                 systems will automatically suggest a shift board in the next time the
-                employee will need to fill up the shift schedule. [&hellip;]</p>
+                employee will need to fill up the shift schedule.</p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="service-item">
+                  <div class="icon">
+                    <img src="img/third-icon.png" alt="">
+                  </div>
+                  <h4>Swap Shifts Easily</h4>
+                  <p>With AI Schedule, workers can easily swap shifts with eachothers.
+                    And the manager be able to supervise and approve the shift’s changes.
+                  </p>
+                </div>
+              </div>
+              </div>
+			  </div>
+        </section>
 
-          </article>
-        </li>
-        <li class="one_third">
-          <article><a href="#"><i class="fas fa-podcast"></i></a>
-            <h6 class="heading">Workers Managing Site</h6>
-            <p>The AI-Schedule will include a site that will allow the manager or team leader to manage and supervise the projects and tasks for each
-                employee. The manager will be able to write notes, set deadlines, see the employee progressing, etc. [&hellip;]</p>
-          </article>
-        </li>
-      </ul>
-    </section>
+
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        </body>
 {% endblock content %}

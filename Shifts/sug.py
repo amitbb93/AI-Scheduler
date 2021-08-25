@@ -1,9 +1,11 @@
 import csv
+import re
 import numpy as np
 import pandas as pd
-import os.path
 from os import path
+from . import utils
 from sklearn.linear_model import LogisticRegression
+from . import database
 
 
 def openCsvFileForMl(userconnected):
@@ -29,11 +31,11 @@ def writetoCsv(filename,l):
         for line in reader:
             writer.writerow(line)
 
-def firstTimeML(userconnected='Eyal'):
+def firstTimeML(userconnected):
 
     fileName = openCsvFileForMl(userconnected)
     workerPerf = '..\\data\\'+userconnected+'.csv'
-    writetoCsv(fileName)
+    writetoCsv(fileName,addLine(workerPerf))
 
 
 def addLine(workerPerf):
@@ -72,9 +74,6 @@ def addLine(workerPerf):
 
 
 
-
-
-
 def calValuesForNextWeek(workerPerf):
     worker_pre = pd.read_csv(workerPerf, delimiter=',')
     shift_names = worker_pre.columns.values
@@ -83,8 +82,6 @@ def calValuesForNextWeek(workerPerf):
 
     for shift in shift_names:
         l = []
-        # print("week",week)
-        # print("shift",shift)
         all_weeks_before = worker_pre.loc[:, [shift]].values
         four_weeks_before = worker_pre.loc[:, [shift]].iloc[0:4].values
 
@@ -109,7 +106,10 @@ def calValuesForNextWeek(workerPerf):
 
 
 
-def MLalgo(filenameML='C:\\Users\\amitb\\Desktop\\AI_Scheduler\\data\\EyalML.csv',workPerf='C:\\Users\\amitb\\Desktop\\AI_Scheduler\\data\\Eyal.csv'):
+def MLalgo(active_user):
+    filenameML = 'C:\\Users\\amitb\\Desktop\\AI-Scheduler\\data\\' + active_user + 'ML.csv'
+    workPerf = 'C:\\Users\\amitb\\Desktop\\AI-Scheduler\\data\\' + active_user + '.csv'
+
     worker_pre = pd.read_csv(workPerf, delimiter=',')
     shift_names = worker_pre.columns.values
     cal_shift_pref =[0]*21
@@ -122,80 +122,49 @@ def MLalgo(filenameML='C:\\Users\\amitb\\Desktop\\AI_Scheduler\\data\\EyalML.csv
         mask = data['shift Type'] == shift
         pos = np.flatnonzero(mask)
         dataShift=data.iloc[pos]
-
         trainX = dataShift.iloc[:1]
         TrainY =(trainX.taken).values
         trainX=trainX.drop(["taken"],axis=1)
+        x = (trainX - np.min(trainX)) / (np.max(trainX) - np.min(trainX)).values
+        X = dataShift.iloc[:1]
+        X = X.iloc[:, :-1]
+        classifier = LogisticRegression()
+        classifier.fit(trainX, TrainY)
+        y_pred = classifier.predict(X)
+
+        cal_shift_pref[n] = y_pred
+
+    writetoCsv(filenameML,calValuesForNextWeek(workPerf))
+
+def checkIfReadyForML(request):
+    active_user = str(request.user)
+    filenameML = 'C:\\Users\\amitb\\Desktop\\AI-Scheduler\\data\\'+active_user+'ML.csv'
+    workPerf = 'C:\\Users\\amitb\\Desktop\\AI-Scheduler\\data\\'+active_user+'.csv'
 
 
-
-def checkIfReadyForML(filenameML='C:\\Users\\amitb\\Desktop\\AI_Scheduler\\data\\EyalML.csv',workPerf='C:\\Users\\amitb\\Desktop\\AI_Scheduler\\data\\Eyal.csv'):
     if path.exists(filenameML):
-        MLalgo()
+
+        MLalgo(active_user)
         return ""
     else:
         worker_pre = pd.read_csv(workPerf, delimiter=',')
+        print(worker_pre.index)
         if len(worker_pre) == 4:
             firstTimeML()
             MLalgo()
             return ""
         else:
             sh=[0]*21
-            CM=0
-            CE=6
-            CN=13
-            favorite_shifts = "Your favorite shifts are:\n"
-            for i in range(1,21):
-                if i%3==1:
-                    sh[CM] = (worker_pre.iloc[0].values[i])
-                    if CM == 0 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Sunday morning, "
-                    if CM == 1 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Monday morning, "
-                    if CM == 2 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Tuesday morning, "
-                    if CM == 3 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Wednesday morning, "
-                    if CM == 4 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Thursday morning, "
-                    if CM == 5 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Friday morning, "
-                    if CM == 6 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Saturday morning, "
-                    CM= CM+1
-                if i%3==2:
-                    sh[CE] = (worker_pre.iloc[0].values[i])
-                    if CE == 6 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Sunday evening, "
-                    if CE == 7 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Monday evening, "
-                    if CE == 9 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Tuesday evening, "
-                    if CE == 10 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Wednesday evening, "
-                    if CE == 11 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Thursday evening, "
-                    if CE == 12 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Friday evening, "
-                    if CE == 13 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Saturday evening, "
-                    CE = CE + 1
-                if i%3==0:
-                    sh[CN] = (worker_pre.iloc[0].values[i])
-                    if CN == 14 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Sunday night, "
-                    if CN == 15 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Monday night, "
-                    if CN == 16 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Tuesday night, "
-                    if CN == 17 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Wednesday night, "
-                    if CN == 18 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Thursday night, "
-                    if CN == 19 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Friday night, "
-                    if CN == 20 and (worker_pre.iloc[0].values[i]) == 1:
-                        favorite_shifts = favorite_shifts + "Saturday night, "
-                    CN = CN + 1
-            print(sh)
+            c=0
+            for s in utils.DAYS:
+                for d in utils.SHIFTS:
+                    db = database.database.child('worker_preference').child(active_user).child(utils.CURRENT_WEEK).child(s).child(d).get().val()
+                    sh[c]=(re.sub('[^A-Za-z]+', '', s).capitalize()+" "+re.sub('[^A-Za-z]+', '', d).capitalize(),int(db))
+                    c= c + 1
+
+            favorite_shifts = ""
+            for s in sh:
+               if s[1] == 1:
+                   favorite_shifts = favorite_shifts + s[0]+", "
+
             return sh, favorite_shifts

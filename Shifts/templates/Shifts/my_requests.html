@@ -1,0 +1,17 @@
+{% extends "Shifts/base.html" %}
+{% block content %}
+    <h1>My Requests</h1>
+<div class="container">
+</div>
+{% for i,j,k,m,n,c in mylist %}
+    <form action="."  method='post'>
+        {% csrf_token %}
+
+        <br>  <b> From shift: </b> {{j}} &nbsp <b> To shift: </b> {{k}} &nbsp <b> Request for: </b> {{m}} &nbsp <b> Status: <span style="color:{{c}}">{{n}}</span> </b>
+    </form>
+    {% endfor %}
+
+
+
+
+{% endblock content %}

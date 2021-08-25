@@ -1,19 +1,30 @@
 {% extends "Shifts/base.html" %}
 {% block content %}
+
 <form id="schedule" name="schedule" method="post">
 	{% csrf_token %}
-    <h1>Shift Schedule</h1>
+    <h1 align="center">Shift Schedule</h1>
+	<br></br>
 	{% if flag_prev == True %}
     	<button class="btn action-btn" id="prev" name="prev" align="left">Previous Week</button>
     {% endif %}
 	{% if flag_next == True %}
 	<button class="btn action-btn" id="next" name="next" align="right">Next Week</button>
 	{% endif %}
-	<table id="shifts">
-	  <tr>
-		<th>Shift</th>
+	<br></br>
+
+	<table id="shifts" class="shifts">
+		 <tr>
+		<th></th>
 		{% for date in dates %}
-            <th>{{ date }}</th>
+            <th>{{date.0}}</th>
+        {% endfor %}
+	  </tr>
+	  <tr>
+		<th></th>
+		{% for date in dates %}
+
+		   <th>{{date.1}}</th>
         {% endfor %}
 	  </tr>
 	  <tr>

@@ -2,6 +2,8 @@ import csv
 import os.path
 import numpy as np
 import pandas as pd
+from numpy import number
+
 from . import database, utils
 from shutil import copyfile
 from ortools.sat.python import cp_model
@@ -46,6 +48,8 @@ def create_shifts():
         for week in user.val():
             if week == str(utils.get_sunday_date(1)):
                 num_workers = num_workers + 1
+    if num_workers == 0 :
+        return "No one applied to any shifts"
     num_days = 7
     num_shifts = 3
     all_workers = range(num_workers)
@@ -118,3 +122,5 @@ def create_shifts():
     print('  - Number of shift requests met = %i' % solver.ObjectiveValue(),
           '(out of', num_workers * min_shifts_per_worker, ')')
     print('  - wall time       : %f s' % solver.WallTime())
+
+    return "Done"

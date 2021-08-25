@@ -26,7 +26,7 @@ const addContent = (ev) => {
         shifts: selected_dict,
     }
     document.getElementById("result").value = JSON.stringify(shifts_list);
-    let confirmation = confirm("Do you confirm to proceed?")
+    let confirmation = confirm("Pay attention that you chose at least 3 shifts!\n Do you want to proceed?")
     if (confirmation) {
         const url = window.location.href;
         document.getElementById('shifts_to_send').submit();

@@ -35,7 +35,9 @@ def insert_worker_shifts(request):
     for i in utils.get_week_dates(1):
         for j in utils.SHIFT_OPTIONS:
             temp = i + j
+            print(temp)
             temp = request.POST.get(temp)
+
             if(temp == "True"):
                 arr.append(str(1))
             else:
