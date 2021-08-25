@@ -157,7 +157,15 @@ def swap_shifts(from_user,to_user,from_date,to_date,to_date_db):
                 and database.database.child('offer_swap').child(from_user).child(ids[i]).child('to_shift').get().val() != to_date_db:
             database.database.child('offer_swap').child(from_user).child(ids[i]).update({'status': 'Rejected'})
 
-
+    users = database.database.child('offer_swap').shallow().get().val()
+    users = list(users)
+    for i in range(len(users)):
+        ids = database.database.child('offer_swap').child(users[i]).shallow().get().val()
+        ids = list(ids)
+        for j in range(len(ids)):
+            if database.database.child('offer_swap').child(users[i]).child(ids[j]).child(
+                    'to_shift').get().val() == to_date_db:
+                database.database.child('offer_swap').child(users[i]).child(ids[j]).update({'status': 'Rejected'})
 
 def remove_request(from_user,from_date,to_date_db):
 
